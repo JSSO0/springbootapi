@@ -50,6 +50,9 @@ public class PessoaController {
         if(oldPessoa.isPresent()){
             Pessoa pessoa = oldPessoa.get();
             pessoa.setNome(newPessoa.getNome());
+            pessoa.setTelefone(newPessoa.getTelefone()); 
+            pessoa.setEmail(newPessoa.getEmail());
+            pessoa.setCpf(newPessoa.getCpf());
             _pessoaRepository.save(pessoa);
             return new ResponseEntity<Pessoa>(pessoa, HttpStatus.OK);
         }
