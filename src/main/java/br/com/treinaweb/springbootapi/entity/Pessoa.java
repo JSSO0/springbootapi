@@ -14,6 +14,7 @@ public class Pessoa
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    //coluna não pode ser vazia
     @Column(nullable = false)
     private String nome;
 

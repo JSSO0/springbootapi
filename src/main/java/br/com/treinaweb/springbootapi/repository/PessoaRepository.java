@@ -7,3 +7,4 @@ import br.com.treinaweb.springbootapi.entity.Pessoa;
 
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Long> { }
+//intermedio do banco com a API
