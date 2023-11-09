@@ -19,11 +19,13 @@
 <h3>Corpo da Request</h3>
 <h3>
 {
-    "nome": "{nome}",
-    "telefone": "{telefone}",
-    "email": "{email}",
-    "cpf": "{cpf}"
+    "id": "id",
+    "nome": "nome",
+    "telefone": "numero",
+    "email": "email",
+    "cpf": "cpg"
 }
+
 </h3>
 
 <h3>http://localhost:8080/ </h3>
