@@ -1,31 +1,28 @@
 package br.com.treinaweb.springbootapi.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
-public class Pessoa
-{
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class Pessoa {
     private long id;
-
-    //coluna não pode ser vazia
-    @Column(nullable = false)
     private String nome;
-
-    @Column(nullable = false)
     private String telefone;
-
-    @Column(nullable = false)
     private String email;
-
-    @Column(nullable = false)
     private String cpf;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getTelefone() {
         return telefone;
@@ -49,21 +46,5 @@ public class Pessoa
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }
