@@ -31,7 +31,7 @@ public class PessoaController {
             List<Pessoa> pessoas = pessoaService.listarPessoas();
             return ResponseEntity.ok(pessoas);
         } catch (SQLException e) {
-            // Trate a exceção apropriadamente
+            // Tratar a exceção apropriadamente
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -46,7 +46,7 @@ public class PessoaController {
                 return ResponseEntity.notFound().build();
             }
         } catch (SQLException e) {
-            // Trate a exceção apropriadamente
+            // Tratar a exceção apropriadamente
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -57,7 +57,7 @@ public class PessoaController {
             pessoa = pessoaService.criarPessoa(pessoa);
             return ResponseEntity.status(HttpStatus.CREATED).body(pessoa);
         } catch (SQLException e) {
-            // Trate a exceção apropriadamente
+            // Tratar a exceção apropriadamente
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -72,7 +72,7 @@ public class PessoaController {
                 return ResponseEntity.notFound().build();
             }
         } catch (SQLException e) {
-            // Trate a exceção apropriadamente
+            // Tratar a exceção
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -83,7 +83,7 @@ public class PessoaController {
             pessoaService.excluirPessoa(id);
             return ResponseEntity.noContent().build();
         } catch (SQLException e) {
-            // Trate a exceção apropriadamente
+            // Tratar a exceção apropriadamente
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
