@@ -1,6 +1,7 @@
 package br.com.treinaweb.springbootapi.conexao;
 
 
+import br.com.treinaweb.springbootapi.implement.PessoaDAO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -26,5 +27,10 @@ public class AppConfig {
     public Connection connection(DataSource dataSource) throws SQLException {
         // Retrieve a connection from the DataSource
         return dataSource.getConnection();
+    }
+
+    @Bean
+    public PessoaDAO pessoaDAO(DataSource dataSource) throws SQLException {
+        return new PessoaDAO(dataSource.getConnection());
     }
 }

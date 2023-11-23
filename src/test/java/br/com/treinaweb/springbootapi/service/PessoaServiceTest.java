@@ -15,15 +15,14 @@ import static org.mockito.Mockito.*;
 
 public class PessoaServiceTest {
     PessoaDAO pessoaDAO;
-    Connection connection;
+
     PessoaService pessoaService;
 
     @Before
 
     public void setup() {
         this.pessoaDAO = mock(PessoaDAO.class);
-        this.connection = mock(Connection.class);
-        this.pessoaService = new PessoaService(connection);
+        this.pessoaService = new PessoaService(pessoaDAO);
     }
 
     @Test
@@ -37,7 +36,25 @@ public class PessoaServiceTest {
         //then:
         //verifica se pessoaDAO.Listartodasaspessoas foi chamada uma vez
         //verifica se foi retornado uma lista de pessoas
-        verify(pessoaDAO.listarTodasAsPessoas(), times(1));
-        verify(Objects.equals(result, List.of(new Pessoa())));
+        verify(pessoaDAO, times(1)).listarTodasAsPessoas();
+        //verify(pessoaDAO.listarTodasAsPessoas(), times(1));
+        assertEquals(List.of(new Pessoa()), result);
+        //verify(Objects.equals(result, List.of(new Pessoa())));
+    }
+
+    @Test
+    public void shouldReturnObterPessoaId() throws SQLException{
+        // Suponhamos que você tem um registro de Pessoa com id = 1 no seu banco de dados
+        long idExistente = 1;
+        Pessoa pessoaExistente = pessoaService.obterPessoaPorId(idExistente);
+        // Verifica se a Pessoa foi retornada corretamente
+        assertEquals(idExistente, pessoaExistente.getId());
+        // Adicione mais verificações se necessário, comparando outros atributos da Pessoa
+
+        // Suponhamos que você não tenha um registro de Pessoa com id = 999 no seu banco de dados
+        long idInexistente = 999;
+        Pessoa pessoaInexistente = pessoaService.obterPessoaPorId(idExistente);
+        // Verifica se a Pessoa é nula quando não existe no banco de dados
+        assertNull(pessoaInexistente);
     }
 }

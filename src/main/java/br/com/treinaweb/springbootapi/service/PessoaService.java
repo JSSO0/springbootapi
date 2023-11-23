@@ -17,8 +17,8 @@ public class PessoaService {
     private final PessoaDAO pessoaDAO;
 
     @Autowired
-    public PessoaService(Connection connection) {
-        this.pessoaDAO = new PessoaDAO(connection);
+    public PessoaService(PessoaDAO pessoaDAO) {
+        this.pessoaDAO = pessoaDAO;
     }
 
     public List<Pessoa> listarPessoas() throws SQLException {

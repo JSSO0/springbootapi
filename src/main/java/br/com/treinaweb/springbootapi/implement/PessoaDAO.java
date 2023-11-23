@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.treinaweb.springbootapi.entity.Pessoa;
+import br.com.treinaweb.springbootapi.rowmaps.PessoaMapper;
 
 public class PessoaDAO {
     private Connection connection;
@@ -50,33 +51,16 @@ public void inserirPessoa(Long Id, String nome, String telefone, String email, S
     }
     
 }
-/* 
-    public void inserirPessoa(String nome, String telefone, String email, String cpf) throws SQLException {
-        String sql = "INSERT INTO pessoa (nome, telefone, email, cpf) VALUES (?, ?, ?, ?)";
-        
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, nome);
-            preparedStatement.setString(2, telefone);
-            preparedStatement.setString(3, email);
-            preparedStatement.setString(4, cpf);
-            preparedStatement.executeUpdate();
-        }
-    }*/
 
     public Pessoa consultarPessoaPorId(long id) throws SQLException {
         String sql = "SELECT * FROM pessoa WHERE id = ?";
-        
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    Pessoa pessoa = new Pessoa();
-                    pessoa.setId(resultSet.getLong("id"));
-                    pessoa.setNome(resultSet.getString("nome"));
-                    pessoa.setTelefone(resultSet.getString("telefone"));
-                    pessoa.setEmail(resultSet.getString("email"));
-                    pessoa.setCpf(resultSet.getString("cpf"));
-                    return pessoa;
+                    PessoaMapper pessoaMapper = new PessoaMapper();
+                    return pessoaMapper.mapResultSetToPessoa(resultSet);
                 } else {
                     return null;
                 }
