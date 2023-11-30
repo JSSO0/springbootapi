@@ -3,6 +3,7 @@ package br.com.treinaweb.springbootapi.controller;
 import br.com.treinaweb.springbootapi.config.AuthRequest;
 import br.com.treinaweb.springbootapi.config.AuthResponse;
 import br.com.treinaweb.springbootapi.config.JwtAuthenticationFilter;
+import br.com.treinaweb.springbootapi.config.JwtTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,12 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class AuthController {
 
-
     private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager) {
+    public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
         this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
     }
 
     @PostMapping
@@ -34,8 +36,8 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Gera o token e o retorna na resposta
-        String token = JwtAuthenticationFilter.generateToken(authentication);
+        // Gera o token usando o JwtTokenProvider
+        String token = jwtTokenProvider.generateToken(authentication);
         return ResponseEntity.ok(new AuthResponse(token));
     }
 }
