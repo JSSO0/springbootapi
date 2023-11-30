@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-            .antMatchers("/api/public/**").permitAll() // Rotas públicas
+            .antMatchers("/login").permitAll() // Rotas públicas
             .antMatchers("/api/pessoas/**").hasRole("ADMIN") // Exige ROLE_ADMIN para rotas de pessoa
             .anyRequest().authenticated()
             .and()
