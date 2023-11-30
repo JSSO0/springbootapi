@@ -3,6 +3,7 @@ package br.com.treinaweb.springbootapi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.treinaweb.springbootapi.entity.Pessoa;
@@ -25,6 +26,7 @@ public class PessoaController {
         this.pessoaService = pessoaService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public ResponseEntity<List<Pessoa>> listarPessoas() {
         try {
@@ -36,6 +38,7 @@ public class PessoaController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<Pessoa> obterPessoa(@PathVariable long id) {
         try {
@@ -51,6 +54,7 @@ public class PessoaController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Pessoa> criarPessoa(@Valid @RequestBody Pessoa pessoa) {
         try {
@@ -62,6 +66,7 @@ public class PessoaController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<Pessoa> atualizarPessoa(@PathVariable long id, @Valid @RequestBody Pessoa newPessoa) {
         try {
@@ -76,7 +81,8 @@ public class PessoaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
+    
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> excluirPessoa(@PathVariable long id) {
         try {
