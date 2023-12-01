@@ -52,6 +52,8 @@ public void inserirPessoa(String Id, String nome, String telefone, String email,
         preparedStatement.setString(6, username);
         preparedStatement.setString(7, password);
         preparedStatement.executeUpdate();
+    } catch (Exception e){
+        
     }
     
 }

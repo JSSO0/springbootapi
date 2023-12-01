@@ -9,7 +9,7 @@ public class PessoaMapper {
 
     public Pessoa mapResultSetToPessoa(ResultSet resultSet) throws SQLException {
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(resultSet.getLong("id"));
+        pessoa.setId(resultSet.getString("id"));
         pessoa.setNome(resultSet.getString("nome"));
         pessoa.setTelefone(resultSet.getString("telefone"));
         pessoa.setEmail(resultSet.getString("email"));

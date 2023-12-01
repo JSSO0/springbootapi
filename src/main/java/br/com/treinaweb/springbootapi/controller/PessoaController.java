@@ -3,7 +3,6 @@ package br.com.treinaweb.springbootapi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import br.com.treinaweb.springbootapi.entity.Pessoa;
@@ -11,7 +10,7 @@ import br.com.treinaweb.springbootapi.service.PessoaService;
 
 import javax.validation.Valid;
 
-import java.sql.Connection;
+
 
 import java.sql.SQLException;
 import java.util.List;
