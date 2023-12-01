@@ -45,7 +45,7 @@ public class PessoaServiceTest {
     @Test
     public void shouldReturnObterPessoaId() throws SQLException{
         // Suponhamos que você tem um registro de Pessoa com id = 1 no seu banco de dados
-        long idExistente = 1;
+        String idExistente = "1";
         Pessoa pessoaExistente = pessoaService.obterPessoaPorId(idExistente);
         // Verifica se a Pessoa foi retornada corretamente
         assertEquals(idExistente, pessoaExistente.getId());

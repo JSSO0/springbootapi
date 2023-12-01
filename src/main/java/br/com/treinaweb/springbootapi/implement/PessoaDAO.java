@@ -27,36 +27,40 @@ public class PessoaDAO {
 
         while (resultSet.next()) {
             Pessoa pessoa = new Pessoa();
-            pessoa.setId(resultSet.getLong("id"));
+            pessoa.setId(resultSet.getString("id"));
             pessoa.setNome(resultSet.getString("nome"));
             pessoa.setTelefone(resultSet.getString("telefone"));
             pessoa.setEmail(resultSet.getString("email"));
             pessoa.setCpf(resultSet.getString("cpf"));
+            pessoa.setUsername(resultSet.getString("username"));
+            pessoa.setPassword(resultSet.getString("password"));
             pessoas.add(pessoa);
         }
     }
 
     return pessoas;
 }
-public void inserirPessoa(Long Id, String nome, String telefone, String email, String cpf) throws SQLException {
-    String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone) VALUES (?, ?, ?, ?, ?)";
+public void inserirPessoa(String Id, String nome, String telefone, String email, String cpf, String username, String password) throws SQLException {
+    String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
     
     try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-        preparedStatement.setLong(1, Id); 
+        preparedStatement.setString(1, Id);
         preparedStatement.setString(2, cpf);
         preparedStatement.setString(3, email);
         preparedStatement.setString(4, nome);
         preparedStatement.setString(5, telefone);
+        preparedStatement.setString(6, username);
+        preparedStatement.setString(7, password);
         preparedStatement.executeUpdate();
     }
     
 }
 
-    public Pessoa consultarPessoaPorId(long id) throws SQLException {
+    public Pessoa consultarPessoaPorId(String id) throws SQLException {
         String sql = "SELECT * FROM pessoa WHERE id = ?";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setLong(1, id);
+            preparedStatement.setString(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     PessoaMapper pessoaMapper = new PessoaMapper();
@@ -68,24 +72,26 @@ public void inserirPessoa(Long Id, String nome, String telefone, String email, S
         }
     }
 
-    public void atualizarPessoa(long id, String nome, String telefone, String email, String cpf) throws SQLException {
-        String sql = "UPDATE pessoa SET nome = ?, telefone = ?, email = ?, cpf = ? WHERE id = ?";
+    public void atualizarPessoa(String id, String nome, String telefone, String email, String cpf, String username, String password) throws SQLException {
+        String sql = "UPDATE pessoa SET nome = ?, telefone = ?, email = ?, cpf = ?, username = ?, password = ? WHERE id = ?";
         
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, nome);
             preparedStatement.setString(2, telefone);
             preparedStatement.setString(3, email);
             preparedStatement.setString(4, cpf);
-            preparedStatement.setLong(5, id);
+            preparedStatement.setString(5, username);
+            preparedStatement.setString(6, password);
+            preparedStatement.setString(7, id);
             preparedStatement.executeUpdate();
         }
     }
 
-    public void excluirPessoa(long id) throws SQLException {
+    public void excluirPessoa(String id) throws SQLException {
         String sql = "DELETE FROM pessoa WHERE id = ?";
         
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setLong(1, id);
+            preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
         }
     }

@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.treinaweb.springbootapi.entity.Pessoa;
 import br.com.treinaweb.springbootapi.implement.PessoaDAO;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 @Service
 public class PessoaService {
@@ -25,19 +23,19 @@ public class PessoaService {
         return pessoaDAO.listarTodasAsPessoas();
     }
 
-    public Pessoa obterPessoaPorId(long id) throws SQLException {
+    public Pessoa obterPessoaPorId(String id) throws SQLException {
         return pessoaDAO.consultarPessoaPorId(id);
     }
 
     public Pessoa criarPessoa(Pessoa pessoa) throws SQLException {
-        pessoaDAO.inserirPessoa(pessoa.getId(), pessoa.getNome(), pessoa.getTelefone(), pessoa.getEmail(), pessoa.getCpf());
+        pessoaDAO.inserirPessoa(pessoa.getId(), pessoa.getNome(), pessoa.getTelefone(), pessoa.getEmail(), pessoa.getCpf(), pessoa.getUsername(), pessoa.getUsername());
         return pessoa;
     }
 
-    public Pessoa atualizarPessoa(long id, Pessoa newPessoa) throws SQLException {
+    public Pessoa atualizarPessoa(String id, Pessoa newPessoa) throws SQLException {
         Pessoa pessoaExistente = pessoaDAO.consultarPessoaPorId(id);
         if (pessoaExistente != null) {
-            pessoaDAO.atualizarPessoa(id, newPessoa.getNome(), newPessoa.getTelefone(), newPessoa.getEmail(), newPessoa.getCpf());
+            pessoaDAO.atualizarPessoa(id, newPessoa.getNome(), newPessoa.getTelefone(), newPessoa.getEmail(), newPessoa.getCpf(), newPessoa.getUsername(), newPessoa.getPassword());
             pessoaExistente.setNome(newPessoa.getNome());
             pessoaExistente.setTelefone(newPessoa.getTelefone());
             pessoaExistente.setEmail(newPessoa.getEmail());
@@ -48,7 +46,7 @@ public class PessoaService {
         }
     }
 
-    public void excluirPessoa(long id) throws SQLException {
+    public void excluirPessoa(String id) throws SQLException {
         pessoaDAO.excluirPessoa(id);
     }
 }

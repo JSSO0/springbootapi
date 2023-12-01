@@ -26,7 +26,7 @@ public class PessoaController {
         this.pessoaService = pessoaService;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     @GetMapping
     public ResponseEntity<List<Pessoa>> listarPessoas() {
         try {
@@ -38,9 +38,9 @@ public class PessoaController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+
     @GetMapping("/{id}")
-    public ResponseEntity<Pessoa> obterPessoa(@PathVariable long id) {
+    public ResponseEntity<Pessoa> obterPessoa(@PathVariable String id) {
         try {
             Pessoa pessoa = pessoaService.obterPessoaPorId(id);
             if (pessoa != null) {
@@ -54,7 +54,6 @@ public class PessoaController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public ResponseEntity<Pessoa> criarPessoa(@Valid @RequestBody Pessoa pessoa) {
         try {
@@ -66,9 +65,8 @@ public class PessoaController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<Pessoa> atualizarPessoa(@PathVariable long id, @Valid @RequestBody Pessoa newPessoa) {
+    public ResponseEntity<Pessoa> atualizarPessoa(@PathVariable String id, @Valid @RequestBody Pessoa newPessoa) {
         try {
             Pessoa pessoa = pessoaService.atualizarPessoa(id, newPessoa);
             if (pessoa != null) {
@@ -82,9 +80,8 @@ public class PessoaController {
         }
     }
     
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> excluirPessoa(@PathVariable long id) {
+    public ResponseEntity<Object> excluirPessoa(@PathVariable String id) {
         try {
             pessoaService.excluirPessoa(id);
             return ResponseEntity.noContent().build();
