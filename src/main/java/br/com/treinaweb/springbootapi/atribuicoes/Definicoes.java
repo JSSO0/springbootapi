@@ -1,11 +1,11 @@
-package br.com.treinaweb.springbootapi.rowmaps;
+package br.com.treinaweb.springbootapi.atribuicoes;
 
 import br.com.treinaweb.springbootapi.entity.Pessoa;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PessoaMapper {
+public class Definicoes {
 
     public Pessoa mapResultSetToPessoa(ResultSet resultSet) throws SQLException {
         Pessoa pessoa = new Pessoa();
@@ -17,5 +17,14 @@ public class PessoaMapper {
         pessoa.setUsername(resultSet.getString("username"));
         pessoa.setPassword(resultSet.getString("password"));
         return pessoa;
+    }
+
+    public void copiarAtributos(Pessoa destino, Pessoa origem) {
+        destino.setUsername(origem.getUsername());
+        destino.setPassword(origem.getPassword());
+        destino.setNome(origem.getNome());
+        destino.setTelefone(origem.getTelefone());
+        destino.setEmail(origem.getEmail());
+        destino.setCpf(origem.getCpf());
     }
 }
