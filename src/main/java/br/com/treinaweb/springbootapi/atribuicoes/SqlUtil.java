@@ -1,4 +1,4 @@
-package br.com.treinaweb.springbootapi.sqlutil;
+package br.com.treinaweb.springbootapi.atribuicoes;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -10,7 +10,7 @@ public class SqlUtil {
             setParameters(preparedStatement, object);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            // Trate exceções adequadamente
+            throw new SQLException("Erro ao executar a inserção no banco de dados", e);
         }
     }
 
@@ -22,7 +22,7 @@ public class SqlUtil {
             try {
                 preparedStatement.setObject(i + 1, fields[i].get(object));
             } catch (IllegalAccessException e) {
-                // Trate exceções adequadamente
+                throw new SQLException("Erro ao acessar um campo da classe durante a reflexão", e);
             }
         }
     }

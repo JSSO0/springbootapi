@@ -2,6 +2,7 @@ package br.com.treinaweb.springbootapi.service;
 
 import java.util.List;
 
+import br.com.treinaweb.springbootapi.atribuicoes.Definicoes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class PessoaService {
 
     public Pessoa obterPessoaPorId(String id) throws SQLException {
         return pessoaDAO.consultarPessoaPorId(id);
+
     }
 
     public Pessoa criarPessoa(Pessoa pessoa) throws SQLException {
@@ -35,11 +37,9 @@ public class PessoaService {
     public Pessoa atualizarPessoa(String id, Pessoa newPessoa) throws SQLException {
         Pessoa pessoaExistente = pessoaDAO.consultarPessoaPorId(id);
         if (pessoaExistente != null) {
+            Definicoes pessoaMapper = new Definicoes();
             pessoaDAO.atualizarPessoa(new Pessoa());
-            pessoaExistente.setNome(newPessoa.getNome());
-            pessoaExistente.setTelefone(newPessoa.getTelefone());
-            pessoaExistente.setEmail(newPessoa.getEmail());
-            pessoaExistente.setCpf(newPessoa.getCpf());
+            pessoaMapper.copiarAtributos(pessoaExistente, newPessoa);
             return pessoaExistente;
         } else {
             return null;

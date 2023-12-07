@@ -1,60 +1,85 @@
 package br.com.treinaweb.springbootapi.service;
 
+import br.com.treinaweb.springbootapi.atribuicoes.Definicoes;
 import br.com.treinaweb.springbootapi.entity.Pessoa;
 import br.com.treinaweb.springbootapi.implement.PessoaDAO;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class PessoaServiceTest {
-    PessoaDAO pessoaDAO;
 
-    PessoaService pessoaService;
+    @Mock
+    private PessoaDAO pessoaDAOMock;
 
-    @Before
+    @Mock
+    private Definicoes definicoesMock;
 
-    public void setup() {
-        this.pessoaDAO = mock(PessoaDAO.class);
-        this.pessoaService = new PessoaService(pessoaDAO);
+    @InjectMocks
+    private PessoaService pessoaService;
+    @BeforeEach
+    public void setUp() {
+        // Nenhum código necessário aqui se você está usando o @RunWith(MockitoJUnitRunner.class)
     }
 
-    @Test
-    public void shouldReturnListPessoa() throws SQLException {
-        //given:
-        when(pessoaDAO.listarTodasAsPessoas()).thenReturn(List.of(new Pessoa()));
+    // Restante dos testes...
 
-        //when:
-        //quando listar pessoas for chamado
-        List<Pessoa> result = pessoaService.listarPessoas();
-        //then:
-        //verifica se pessoaDAO.Listartodasaspessoas foi chamada uma vez
-        //verifica se foi retornado uma lista de pessoas
-        verify(pessoaDAO, times(1)).listarTodasAsPessoas();
-        //verify(pessoaDAO.listarTodasAsPessoas(), times(1));
-        assertEquals(List.of(new Pessoa()), result);
-        //verify(Objects.equals(result, List.of(new Pessoa())));
+    @Test
+    public void testAtualizarPessoa() throws SQLException {
+        Pessoa pessoaExistente = getPessoaDeExemplo();
+        Pessoa newPessoa = getNovaPessoaDeExemplo();
+
+        // Mockando o comportamento do PessoaDAO
+        when(pessoaDAOMock.consultarPessoaPorId("1")).thenReturn(pessoaExistente);
+
+        // Chamando o método do serviço
+        Pessoa resultado = pessoaService.atualizarPessoa("1", newPessoa);
+
+        // Verificando se o método do PessoaDAO foi chamado
+        verify(pessoaDAOMock, times(1)).atualizarPessoa(any());
+
+        // Verificando se o método copiarAtributos foi chamado
+        verify(definicoesMock, times(1)).copiarAtributos(pessoaExistente, newPessoa);
+
+        // Verificando se o resultado é a pessoa existente
+        assertEquals(pessoaExistente, resultado);
     }
 
-    @Test
-    public void shouldReturnObterPessoaId() throws SQLException{
-        // Suponhamos que você tem um registro de Pessoa com id = 1 no seu banco de dados
-        String idExistente = "1";
-        Pessoa pessoaExistente = pessoaService.obterPessoaPorId(idExistente);
-        // Verifica se a Pessoa foi retornada corretamente
-        assertEquals(idExistente, pessoaExistente.getId());
-        // Adicione mais verificações se necessário, comparando outros atributos da Pessoa
+    // Métodos de apoio para criar dados de exemplo
+    private @NotNull List<Pessoa> getListaPessoasDeExemplo() {
+        List<Pessoa> pessoas = new ArrayList<>();
+        pessoas.add(getPessoaDeExemplo());
+        return pessoas;
+    }
 
-        // Suponhamos que você não tenha um registro de Pessoa com id = 999 no seu banco de dados
-        long idInexistente = 999;
-        Pessoa pessoaInexistente = pessoaService.obterPessoaPorId(idExistente);
-        // Verifica se a Pessoa é nula quando não existe no banco de dados
-        assertNull(pessoaInexistente);
+
+    private Pessoa getPessoaDeExemplo() {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId("1");
+        pessoa.setNome("Exemplo");
+        // Outros atributos...
+        return pessoa;
+    }
+
+    private Pessoa getNovaPessoaDeExemplo() {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setId("1");
+        pessoa.setNome("Novo Exemplo");
+        // Outros atributos...
+        return pessoa;
     }
 }

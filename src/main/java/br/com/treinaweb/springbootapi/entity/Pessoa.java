@@ -76,6 +76,7 @@ public class Pessoa {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

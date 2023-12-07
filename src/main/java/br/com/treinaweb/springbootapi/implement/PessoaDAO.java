@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.treinaweb.springbootapi.atribuicoes.Definicoes;
 import br.com.treinaweb.springbootapi.entity.Pessoa;
-import br.com.treinaweb.springbootapi.rowmaps.PessoaMapper;
-import br.com.treinaweb.springbootapi.sqlutil.SqlUtil;
+import br.com.treinaweb.springbootapi.atribuicoes.SqlUtil;
 
 public class PessoaDAO {
     private Connection connection;
-    private PessoaMapper pessoaMapper;
+    private Definicoes pessoaMapper;
 
     private SqlUtil sqlUtil;
 
@@ -22,7 +22,7 @@ public class PessoaDAO {
     // Construtor que recebe uma conexão com o banco de dados
     public PessoaDAO(Connection connection) throws SQLException {
         this.connection = connection;
-        this.pessoaMapper = new PessoaMapper();
+        this.pessoaMapper = new Definicoes();
         this.sqlUtil = new SqlUtil();
         this.pessoa = new Pessoa();
     }
@@ -57,7 +57,7 @@ public class PessoaDAO {
             preparedStatement.setString(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    PessoaMapper pessoaMapper = new PessoaMapper();
+                    Definicoes pessoaMapper = new Definicoes();
                     return pessoaMapper.mapResultSetToPessoa(resultSet);
                 } else {
                     return null;
