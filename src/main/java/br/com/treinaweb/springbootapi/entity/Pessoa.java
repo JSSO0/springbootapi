@@ -19,7 +19,6 @@ public class Pessoa {
 
 
     public Pessoa() {
-        // Gera um ID único usando UUID
         this.id = UUID.randomUUID().toString();
     }
 

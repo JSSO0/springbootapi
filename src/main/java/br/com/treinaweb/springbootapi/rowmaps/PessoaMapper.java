@@ -14,6 +14,8 @@ public class PessoaMapper {
         pessoa.setTelefone(resultSet.getString("telefone"));
         pessoa.setEmail(resultSet.getString("email"));
         pessoa.setCpf(resultSet.getString("cpf"));
+        pessoa.setUsername(resultSet.getString("username"));
+        pessoa.setPassword(resultSet.getString("password"));
         return pessoa;
     }
 }

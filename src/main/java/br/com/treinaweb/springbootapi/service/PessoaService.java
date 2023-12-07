@@ -28,14 +28,14 @@ public class PessoaService {
     }
 
     public Pessoa criarPessoa(Pessoa pessoa) throws SQLException {
-        pessoaDAO.inserirPessoa(pessoa.getId(), pessoa.getNome(), pessoa.getTelefone(), pessoa.getEmail(), pessoa.getCpf(), pessoa.getUsername(), pessoa.getUsername());
+        pessoaDAO.criarPessoa(pessoa);
         return pessoa;
     }
 
     public Pessoa atualizarPessoa(String id, Pessoa newPessoa) throws SQLException {
         Pessoa pessoaExistente = pessoaDAO.consultarPessoaPorId(id);
         if (pessoaExistente != null) {
-            pessoaDAO.atualizarPessoa(id, newPessoa.getNome(), newPessoa.getTelefone(), newPessoa.getEmail(), newPessoa.getCpf(), newPessoa.getUsername(), newPessoa.getPassword());
+            pessoaDAO.atualizarPessoa(new Pessoa());
             pessoaExistente.setNome(newPessoa.getNome());
             pessoaExistente.setTelefone(newPessoa.getTelefone());
             pessoaExistente.setEmail(newPessoa.getEmail());

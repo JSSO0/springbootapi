@@ -9,54 +9,46 @@ import java.util.List;
 
 import br.com.treinaweb.springbootapi.entity.Pessoa;
 import br.com.treinaweb.springbootapi.rowmaps.PessoaMapper;
+import br.com.treinaweb.springbootapi.sqlutil.SqlUtil;
 
 public class PessoaDAO {
     private Connection connection;
+    private PessoaMapper pessoaMapper;
+
+    private SqlUtil sqlUtil;
+
+    private Pessoa pessoa;
 
     // Construtor que recebe uma conexão com o banco de dados
-    public PessoaDAO(Connection connection) {
+    public PessoaDAO(Connection connection) throws SQLException {
         this.connection = connection;
+        this.pessoaMapper = new PessoaMapper();
+        this.sqlUtil = new SqlUtil();
+        this.pessoa = new Pessoa();
     }
 
     public List<Pessoa> listarTodasAsPessoas() throws SQLException {
-    List<Pessoa> pessoas = new ArrayList<>();
-    String sql = "SELECT * FROM pessoa";
+        List<Pessoa> pessoas = new ArrayList<>();
+        String sql = "SELECT * FROM pessoa";
 
-    try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
-         ResultSet resultSet = preparedStatement.executeQuery()) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
+                ResultSet resultSet = preparedStatement.executeQuery()) {
 
-        while (resultSet.next()) {
-            Pessoa pessoa = new Pessoa();
-            pessoa.setId(resultSet.getString("id"));
-            pessoa.setNome(resultSet.getString("nome"));
-            pessoa.setTelefone(resultSet.getString("telefone"));
-            pessoa.setEmail(resultSet.getString("email"));
-            pessoa.setCpf(resultSet.getString("cpf"));
-            pessoa.setUsername(resultSet.getString("username"));
-            pessoa.setPassword(resultSet.getString("password"));
-            pessoas.add(pessoa);
+            while (resultSet.next()) {
+                Pessoa pessoa = pessoaMapper.mapResultSetToPessoa(resultSet);
+                pessoas.add(pessoa);
+            }
         }
+
+        return pessoas;
     }
 
-    return pessoas;
-}
-public void inserirPessoa(String Id, String nome, String telefone, String email, String cpf, String username, String password) throws SQLException {
-    String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    
-    try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-        preparedStatement.setString(1, Id);
-        preparedStatement.setString(2, cpf);
-        preparedStatement.setString(3, email);
-        preparedStatement.setString(4, nome);
-        preparedStatement.setString(5, telefone);
-        preparedStatement.setString(6, username);
-        preparedStatement.setString(7, password);
-        preparedStatement.executeUpdate();
-    } catch (Exception e){
-        
+    public void criarPessoa(Pessoa pessoa) throws SQLException {
+        String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+        SqlUtil.executeInsert(sql, connection, pessoa);
+
     }
-    
-}
 
     public Pessoa consultarPessoaPorId(String id) throws SQLException {
         String sql = "SELECT * FROM pessoa WHERE id = ?";
@@ -74,24 +66,15 @@ public void inserirPessoa(String Id, String nome, String telefone, String email,
         }
     }
 
-    public void atualizarPessoa(String id, String nome, String telefone, String email, String cpf, String username, String password) throws SQLException {
+    public void atualizarPessoa(Pessoa pessoa) throws SQLException {
         String sql = "UPDATE pessoa SET nome = ?, telefone = ?, email = ?, cpf = ?, username = ?, password = ? WHERE id = ?";
-        
-        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, nome);
-            preparedStatement.setString(2, telefone);
-            preparedStatement.setString(3, email);
-            preparedStatement.setString(4, cpf);
-            preparedStatement.setString(5, username);
-            preparedStatement.setString(6, password);
-            preparedStatement.setString(7, id);
-            preparedStatement.executeUpdate();
-        }
+
+        SqlUtil.executeInsert(sql, connection, pessoa);
     }
 
     public void excluirPessoa(String id) throws SQLException {
         String sql = "DELETE FROM pessoa WHERE id = ?";
-        
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, id);
             preparedStatement.executeUpdate();
