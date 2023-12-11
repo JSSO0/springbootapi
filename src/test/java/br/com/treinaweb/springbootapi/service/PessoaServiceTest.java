@@ -1,10 +1,7 @@
 package br.com.treinaweb.springbootapi.service;
 
-import br.com.treinaweb.springbootapi.atribuicoes.Definicoes;
 import br.com.treinaweb.springbootapi.entity.Pessoa;
 import br.com.treinaweb.springbootapi.implement.PessoaDAO;
-import org.jetbrains.annotations.NotNull;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -14,29 +11,22 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PessoaServiceTest {
-
     @Mock
     private PessoaDAO pessoaDAOMock;
 
-    @Mock
-    private Definicoes definicoesMock;
-
     @InjectMocks
     private PessoaService pessoaService;
+
     @BeforeEach
     public void setUp() {
-        // Nenhum código necessário aqui se você está usando o @RunWith(MockitoJUnitRunner.class)
+        MockitoAnnotations.openMocks(this);
     }
-
-    // Restante dos testes...
 
     @Test
     public void testAtualizarPessoa() throws SQLException {
@@ -50,23 +40,16 @@ public class PessoaServiceTest {
         Pessoa resultado = pessoaService.atualizarPessoa("1", newPessoa);
 
         // Verificando se o método do PessoaDAO foi chamado
-        verify(pessoaDAOMock, times(1)).atualizarPessoa(any());
-
-        // Verificando se o método copiarAtributos foi chamado
-        verify(definicoesMock, times(1)).copiarAtributos(pessoaExistente, newPessoa);
+        verify(pessoaDAOMock, times(1)).consultarPessoaPorId("1");
 
         // Verificando se o resultado é a pessoa existente
         assertEquals(pessoaExistente, resultado);
+
+        // Verificando se o método atualizarPessoa foi chamado no DAO
+        verify(pessoaDAOMock, times(1)).atualizarPessoa(any());
     }
 
     // Métodos de apoio para criar dados de exemplo
-    private @NotNull List<Pessoa> getListaPessoasDeExemplo() {
-        List<Pessoa> pessoas = new ArrayList<>();
-        pessoas.add(getPessoaDeExemplo());
-        return pessoas;
-    }
-
-
     private Pessoa getPessoaDeExemplo() {
         Pessoa pessoa = new Pessoa();
         pessoa.setId("1");
