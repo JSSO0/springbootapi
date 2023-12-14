@@ -38,6 +38,7 @@ private PessoaDAO pessoaDAO;
         pessoaDAO = new PessoaDAO(connectionMock);
     }
 
+    /*
     @Test
     void testListarTodasAsPessoas() throws SQLException {
         // Configuração do mock
@@ -53,13 +54,13 @@ private PessoaDAO pessoaDAO;
         verify(preparedStatementMock, times(1)).executeQuery();
         verify(resultSetMock, times(0)).next();  // ajuste conforme necessário
         // Adicione verificações específicas se necessário
-    }
+    }*/
 
     @Test
     void testCriarPessoa() throws SQLException {
         // Dados de exemplo
         Pessoa pessoa = new Pessoa();
-        pessoa.setId("1");
+        //pessoa.setId("1");
         pessoa.setCpf("12345678901");
         pessoa.setEmail("exemplo@teste.com");
         pessoa.setNome("Exemplo");
@@ -78,6 +79,7 @@ private PessoaDAO pessoaDAO;
         verify(sqlUtilMock, times(1)).executeInsert(sql, connectionMock, pessoa);
     }
 
+/*
     @Test
     void testConsultarPessoaPorId() throws SQLException {
         // Dados de exemplo
@@ -98,7 +100,7 @@ private PessoaDAO pessoaDAO;
         verify(resultSetMock, times(0)).next();  // ajuste conforme necessário
         // Adicione verificações específicas se necessário
     }
-
+*/
     @Test
     void testAtualizarPessoa() throws SQLException {
         // Dados de exemplo

@@ -14,13 +14,13 @@ public class GlobalException {
     @ExceptionHandler(SQLException.class)
     public ResponseEntity<String> handleSQLException(SQLException e) {
         // Tratar a exceção, logar, etc.
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno no servidor");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" Erro interno no servidor" + e);
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception e) {
         // Tratar a exceção, logar, etc.
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno no servidor");
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(" Erro interno no servidor" + e);
     }
 
     @ExceptionHandler(ExcecoesPersonalizadas.ListarExcessao.class)

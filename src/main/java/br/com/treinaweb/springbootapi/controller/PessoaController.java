@@ -20,6 +20,7 @@ import br.com.treinaweb.springbootapi.exceptionhandler.GlobalException;
 
 @RestController
 @RequestMapping("/api/pessoas")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PessoaController {
 
     private final PessoaService pessoaService;

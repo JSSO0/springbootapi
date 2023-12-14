@@ -82,7 +82,7 @@ public class Pessoa {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pessoa pessoa = (Pessoa) o;
-        return id == pessoa.id &&
+        return id.equals(pessoa.id) &&
                 Objects.equals(nome, pessoa.nome) &&
                 Objects.equals(telefone, pessoa.telefone) &&
                 Objects.equals(email, pessoa.email) &&
