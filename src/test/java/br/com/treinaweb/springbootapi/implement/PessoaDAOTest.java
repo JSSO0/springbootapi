@@ -21,7 +21,7 @@ public class PessoaDAOTest { @InjectMocks
 private PessoaDAO pessoaDAO;
 
     @Mock
-    private Connection connectionMock;
+    private static Connection connectionMock;
 
     @Mock
     private PreparedStatement preparedStatementMock;
@@ -55,9 +55,9 @@ private PessoaDAO pessoaDAO;
         verify(resultSetMock, times(0)).next();  // ajuste conforme necessário
         // Adicione verificações específicas se necessário
     }*/
-/* 
+
 @Test
-void testCriarPessoa() throws SQLException {
+static void testCriarPessoa() throws SQLException {
     // Dados de exemplo
     Pessoa pessoa = new Pessoa();
     pessoa.setCpf("12345678901");
@@ -76,8 +76,9 @@ void testCriarPessoa() throws SQLException {
 
    
     String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    verify(sqlUtilMock, times(1)).executeInsert(sql, connectionMock, pessoa);
-}*/
+    verify(sqlUtilMock, times(1));
+    SqlUtil.executeInsert(sql, connectionMock, pessoa);
+}
 
 /*
     @Test
