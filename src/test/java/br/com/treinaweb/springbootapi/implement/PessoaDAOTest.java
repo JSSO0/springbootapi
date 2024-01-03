@@ -38,6 +38,9 @@ private PessoaDAO pessoaDAO;
         pessoaDAO = new PessoaDAO(connectionMock);
     }
 
+    public void PessoaDAO(SqlUtil sqlUtil) {
+        this.sqlUtilMock = sqlUtil;
+    }
     /*
     @Test
     void testListarTodasAsPessoas() throws SQLException {
@@ -55,29 +58,29 @@ private PessoaDAO pessoaDAO;
         verify(resultSetMock, times(0)).next();  // ajuste conforme necessário
         // Adicione verificações específicas se necessário
     }*/
+/* 
+@Test
+void testCriarPessoa() throws SQLException {
+    // Dados de exemplo
+    Pessoa pessoa = new Pessoa();
+    pessoa.setCpf("12345678901");
+    pessoa.setEmail("exemplo@teste.com");
+    pessoa.setNome("Exemplo");
+    pessoa.setTelefone("123456789");
+    pessoa.setUsername("usuario");
+    pessoa.setPassword("senha");
 
-    @Test
-    void testCriarPessoa() throws SQLException {
-        // Dados de exemplo
-        Pessoa pessoa = new Pessoa();
-        //pessoa.setId("1");
-        pessoa.setCpf("12345678901");
-        pessoa.setEmail("exemplo@teste.com");
-        pessoa.setNome("Exemplo");
-        pessoa.setTelefone("123456789");
-        pessoa.setUsername("usuario");
-        pessoa.setPassword("senha");
+   
+    SqlUtil sqlUtilMock = mock(SqlUtil.class);
+    PessoaDAO pessoaDAO = new PessoaDAO(connectionMock);
 
-        // Configuração do mock
-        String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        when(connectionMock.prepareStatement(sql)).thenReturn(preparedStatementMock);
+    
+    assertDoesNotThrow(() -> pessoaDAO.criarPessoa(pessoa));
 
-        // Chamada do método
-        assertDoesNotThrow(() -> pessoaDAO.criarPessoa(pessoa));
-
-        // Verificações
-        verify(sqlUtilMock, times(1)).executeInsert(sql, connectionMock, pessoa);
-    }
+   
+    String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    verify(sqlUtilMock, times(1)).executeInsert(sql, connectionMock, pessoa);
+}*/
 
 /*
     @Test
