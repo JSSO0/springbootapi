@@ -38,9 +38,6 @@ private PessoaDAO pessoaDAO;
         pessoaDAO = new PessoaDAO(connectionMock);
     }
 
-    public void PessoaDAO(SqlUtil sqlUtil) {
-        this.sqlUtilMock = sqlUtil;
-    }
     /*
     @Test
     void testListarTodasAsPessoas() throws SQLException {
