@@ -57,7 +57,7 @@ private PessoaDAO pessoaDAO;
     }*/
 
 @Test
-static void testCriarPessoa() throws SQLException {
+void testCriarPessoa() throws SQLException {
     // Dados de exemplo
     Pessoa pessoa = new Pessoa();
     pessoa.setCpf("12345678901");
@@ -122,7 +122,8 @@ static void testCriarPessoa() throws SQLException {
         assertDoesNotThrow(() -> pessoaDAO.atualizarPessoa(pessoa));
 
         // Verificações
-        verify(sqlUtilMock, times(1)).executeInsert(sql, connectionMock, pessoa);
+        verify(sqlUtilMock, times(1));
+        SqlUtil.executeInsert(sql, connectionMock, pessoa);
     }
 
     @Test

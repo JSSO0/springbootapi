@@ -43,7 +43,7 @@ public class SqlUtilTest {
         when(connectionMock.prepareStatement(sql)).thenReturn(preparedStatementMock);
 
         // Chamada do método
-        assertDoesNotThrow(() -> sqlUtil.executeInsert(sql, connectionMock, testObject));
+        assertDoesNotThrow(() -> SqlUtil.executeInsert(sql, connectionMock, testObject));
 
         // Verificações
         verify(connectionMock, times(1)).prepareStatement(sql);
@@ -63,7 +63,7 @@ public class SqlUtilTest {
         when(preparedStatementMock.getParameterMetaData()).thenReturn(null);
 
         // Chamada do método
-        assertDoesNotThrow(() -> sqlUtil.setParameters(preparedStatementMock, testObject));
+        assertDoesNotThrow(() -> SqlUtil.setParameters(preparedStatementMock, testObject));
 
         // Verificações
         verify(preparedStatementMock, times(1)).setObject(1, "valor1");
