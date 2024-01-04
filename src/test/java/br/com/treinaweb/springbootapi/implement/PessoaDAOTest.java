@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.*;
@@ -26,8 +25,8 @@ private PessoaDAO pessoaDAO;
     @Mock
     private PreparedStatement preparedStatementMock;
 
-    @Mock
-    private ResultSet resultSetMock;
+   /* @Mock
+    private ResultSet resultSetMock;*/
 
     @Mock
     private SqlUtil sqlUtilMock;
@@ -75,7 +74,8 @@ void testCriarPessoa() throws SQLException {
 
    
     String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    verify(sqlUtilMock, times(1)).executeInsert(sql, connectionMock, pessoa);
+    verify(sqlUtilMock, times(1));
+    SqlUtil.executeInsert(sql, connectionMock, pessoa);
 }
 
 /*

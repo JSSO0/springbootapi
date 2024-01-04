@@ -18,8 +18,8 @@ import static org.mockito.Mockito.*;
 
 public class SqlUtilTest {
 
-    @InjectMocks
-    private SqlUtil sqlUtil;
+   /* @InjectMocks
+    private SqlUtil sqlUtil;*/
 
     @Mock
     private Connection connectionMock;
@@ -53,7 +53,7 @@ public class SqlUtilTest {
     }
 
     @Test
-    public void testSetParameters() throws SQLException, NoSuchFieldException {
+    public void testSetParameters() throws SQLException {
         // Dados de exemplo
         TestObject testObject = new TestObject();
         testObject.setColuna1("valor1");
@@ -75,17 +75,17 @@ public class SqlUtilTest {
         private String coluna1;
         private String coluna2;
 
-        public String getColuna1() {
+       /* public String getColuna1() {
             return coluna1;
-        }
+        }*/
 
         public void setColuna1(String coluna1) {
             this.coluna1 = coluna1;
         }
 
-        public String getColuna2() {
+        /*public String getColuna2() {
             return coluna2;
-        }
+        }*/
 
         public void setColuna2(String coluna2) {
             this.coluna2 = coluna2;
