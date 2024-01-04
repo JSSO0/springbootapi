@@ -18,8 +18,8 @@ public class SqlUtil {
         Field[] fields = object.getClass().getDeclaredFields();
 
         for (int i = 0; i < fields.length; i++) {
-            fields[i].setAccessible(true);
             try {
+                fields[i].setAccessible(true);
                 preparedStatement.setObject(i + 1, fields[i].get(object));
             } catch (IllegalAccessException e) {
                 throw new SQLException("Erro ao acessar um campo da classe durante a reflexão", e);

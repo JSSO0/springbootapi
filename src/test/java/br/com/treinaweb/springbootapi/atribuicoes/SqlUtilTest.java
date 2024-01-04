@@ -71,7 +71,7 @@ public class SqlUtilTest {
     }
 
     // Classe de exemplo para os testes
-    private static class TestObject {
+    static class TestObject {
         private String coluna1;
         private String coluna2;
 

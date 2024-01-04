@@ -71,13 +71,11 @@ void testCriarPessoa() throws SQLException {
     SqlUtil sqlUtilMock = mock(SqlUtil.class);
     PessoaDAO pessoaDAO = new PessoaDAO(connectionMock);
 
-    
     assertDoesNotThrow(() -> pessoaDAO.criarPessoa(pessoa));
 
    
     String sql = "INSERT INTO pessoa (id, cpf, email, nome, telefone, username, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    verify(sqlUtilMock, times(1));
-    SqlUtil.executeInsert(sql, connectionMock, pessoa);
+    verify(sqlUtilMock, times(1)).executeInsert(sql, connectionMock, pessoa);
 }
 
 /*
