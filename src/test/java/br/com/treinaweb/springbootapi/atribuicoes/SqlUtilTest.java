@@ -1,7 +1,6 @@
 package br.com.treinaweb.springbootapi.atribuicoes;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -75,17 +74,17 @@ public class SqlUtilTest {
         private String coluna1;
         private String coluna2;
 
-       /* public String getColuna1() {
+        public String getColuna1() {
             return coluna1;
-        }*/
+        }
 
         public void setColuna1(String coluna1) {
             this.coluna1 = coluna1;
         }
 
-        /*public String getColuna2() {
+        public String getColuna2() {
             return coluna2;
-        }*/
+        }
 
         public void setColuna2(String coluna2) {
             this.coluna2 = coluna2;
