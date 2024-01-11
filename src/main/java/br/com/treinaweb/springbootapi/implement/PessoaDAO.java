@@ -15,7 +15,7 @@ public class PessoaDAO {
     private Connection connection;
     private Definicoes pessoaMapper;
 
-    private SqlUtil sqlUtil;
+    private SqlUtil sqlutil;
 
     private Pessoa pessoa;
 
@@ -23,7 +23,7 @@ public class PessoaDAO {
     public PessoaDAO(Connection connection) throws SQLException {
         this.connection = connection;
         this.pessoaMapper = new Definicoes();
-        this.sqlUtil = new SqlUtil();
+        this.sqlutil = new SqlUtil();
         this.pessoa = new Pessoa();
     }
 

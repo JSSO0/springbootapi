@@ -6,8 +6,10 @@ import java.sql.Connection
 import java.sql.PreparedStatement
 
 class SqlUtilTeste extends Specification {
+
     PreparedStatement preparedStatement = Mock(PreparedStatement)
     Connection connection = Mock(Connection)
+
     def 'shouldExecuteInsert'(){
         given:
 

@@ -1,13 +1,14 @@
 package br.com.treinaweb.springbootapi.atribuicoes;
 
 import br.com.treinaweb.springbootapi.entity.Pessoa;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Definicoes {
 
-    public Pessoa mapResultSetToPessoa(ResultSet resultSet) throws SQLException {
+    public Pessoa mapResultSetToPessoa(@NotNull ResultSet resultSet) throws SQLException {
         Pessoa pessoa = new Pessoa();
         pessoa.setId(resultSet.getString("id"));
         pessoa.setNome(resultSet.getString("nome"));
@@ -19,7 +20,7 @@ public class Definicoes {
         return pessoa;
     }
 
-    public void copiarAtributos(Pessoa destino, Pessoa origem) {
+    public void copiarAtributos(@NotNull Pessoa destino, @NotNull Pessoa origem) {
         destino.setUsername(origem.getUsername());
         destino.setPassword(origem.getPassword());
         destino.setNome(origem.getNome());
