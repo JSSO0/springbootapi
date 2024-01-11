@@ -35,13 +35,19 @@ class PessoaDAOTeste extends Specification {
 
     def 'shouldListarTodasAsPessoas'() {
         given:
+        def connectionMock = Mock(Connection)
+        def preparedStatementMock = Mock(PreparedStatement)
         def resultSetMock = Mock(ResultSet)
-        def pessoaMock = Mock(Pessoa)
+        def definicoesMock = Mock(Definicoes)
 
+        // Configurando o mock para o método executeQuery
         connectionMock.prepareStatement(_) >> preparedStatementMock
         preparedStatementMock.executeQuery() >> resultSetMock
         resultSetMock.next() >> true >> false
-        definicoesMock.mapResultSetToPessoa(_) >> pessoaMock
+        definicoesMock.mapResultSetToPessoa(_) >> new Pessoa()
+
+        // Criando PessoaDAO com a conexão mock
+        def pessoaDAO = new PessoaDAO(connectionMock)
 
         when:
         def result = pessoaDAO.listarTodasAsPessoas()
