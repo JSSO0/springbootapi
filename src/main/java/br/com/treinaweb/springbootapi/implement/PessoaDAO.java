@@ -12,19 +12,14 @@ import br.com.treinaweb.springbootapi.entity.Pessoa;
 import br.com.treinaweb.springbootapi.atribuicoes.SqlUtil;
 
 public class PessoaDAO {
-    private Connection connection;
-    private Definicoes pessoaMapper;
+    private final Connection connection;
+    private final Definicoes pessoaMapper;
 
-    private SqlUtil sqlutil;
-
-    private Pessoa pessoa;
 
     // Construtor que recebe uma conexão com o banco de dados
-    public PessoaDAO(SqlUtil connection) throws SQLException {
-        this.connection = (Connection) connection;
+    public PessoaDAO(Connection connection) throws SQLException {
+        this.connection = connection;
         this.pessoaMapper = new Definicoes();
-        this.sqlutil = new SqlUtil();
-        this.pessoa = new Pessoa();
     }
 
     public List<Pessoa> listarTodasAsPessoas() throws SQLException {

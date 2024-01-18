@@ -25,14 +25,8 @@ public class AppConfig {
     }
 
     @Bean
-    public Connection connection(DataSource dataSource) throws SQLException {
-        // Retrieve a connection from the DataSource
-        return dataSource.getConnection();
-    }
-
-    @Bean
     public PessoaDAO pessoaDAO(Connection connection) throws SQLException {
-        return new PessoaDAO((SqlUtil) connection);
+        return new PessoaDAO(connection);
     }
 
 }
