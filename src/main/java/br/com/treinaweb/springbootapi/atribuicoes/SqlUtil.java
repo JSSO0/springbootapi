@@ -1,5 +1,7 @@
 package br.com.treinaweb.springbootapi.atribuicoes;
 
+import br.com.treinaweb.springbootapi.conexao.DatabaseConnection;
+
 import java.lang.reflect.Field;
 import java.sql.*;
 
@@ -28,5 +30,4 @@ public class SqlUtil {
             }
         }
     }
-
 }
