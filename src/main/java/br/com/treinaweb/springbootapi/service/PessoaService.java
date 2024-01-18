@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 @Service
 public class PessoaService {
-    private final PessoaDAO pessoaDAO;
+    final PessoaDAO pessoaDAO;
 
     @Autowired
     public PessoaService(PessoaDAO pessoaDAO) {

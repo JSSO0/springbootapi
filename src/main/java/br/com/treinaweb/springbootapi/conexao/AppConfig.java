@@ -1,6 +1,7 @@
 package br.com.treinaweb.springbootapi.conexao;
 
 
+import br.com.treinaweb.springbootapi.atribuicoes.SqlUtil;
 import br.com.treinaweb.springbootapi.implement.PessoaDAO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +31,9 @@ public class AppConfig {
     }
 
     @Bean
-    public PessoaDAO pessoaDAO(DataSource dataSource) throws SQLException {
-        return new PessoaDAO(dataSource.getConnection());
+    public PessoaDAO pessoaDAO(Connection connection) throws SQLException {
+        return new PessoaDAO((SqlUtil) connection);
     }
+
 }
+

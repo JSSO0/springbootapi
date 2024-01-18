@@ -1,11 +1,13 @@
 package br.com.treinaweb.springbootapi.atribuicoes;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+
 public class SqlUtil {
     public static void executeInsert(String sql, Connection connection, Object object) throws SQLException {
+        if (connection == null) {
+            throw new SQLException("A conexão não foi inicializada corretamente.");
+        }
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             setParameters(preparedStatement, object);
             preparedStatement.executeUpdate();
@@ -26,4 +28,5 @@ public class SqlUtil {
             }
         }
     }
+
 }

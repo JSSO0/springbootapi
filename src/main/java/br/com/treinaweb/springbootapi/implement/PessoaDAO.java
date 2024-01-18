@@ -20,8 +20,8 @@ public class PessoaDAO {
     private Pessoa pessoa;
 
     // Construtor que recebe uma conexão com o banco de dados
-    public PessoaDAO(Connection connection) throws SQLException {
-        this.connection = connection;
+    public PessoaDAO(SqlUtil connection) throws SQLException {
+        this.connection = (Connection) connection;
         this.pessoaMapper = new Definicoes();
         this.sqlutil = new SqlUtil();
         this.pessoa = new Pessoa();
