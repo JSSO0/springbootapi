@@ -11,15 +11,20 @@ import br.com.treinaweb.springbootapi.atribuicoes.Definicoes;
 import br.com.treinaweb.springbootapi.entity.Pessoa;
 import br.com.treinaweb.springbootapi.atribuicoes.SqlUtil;
 
+import javax.sql.DataSource;
+
 public class PessoaDAO {
     private final Connection connection;
     private final Definicoes pessoaMapper;
+    private DataSource dataSource;
+
 
 
     // Construtor que recebe uma conexão com o banco de dados
     public PessoaDAO(Connection connection) throws SQLException {
         this.connection = connection;
         this.pessoaMapper = new Definicoes();
+        this.dataSource = dataSource;
     }
 
     public List<Pessoa> listarTodasAsPessoas() throws SQLException {
