@@ -29,7 +29,6 @@ class PessoaServiceTest {
 
     @Test
     public void testCriarPessoa() throws SQLException {
-        // Criação de uma pessoa fictícia para o teste
         Pessoa pessoaParaTeste = new Pessoa();
         pessoaParaTeste.setId("1");
         pessoaParaTeste.setNome("João");
@@ -40,13 +39,10 @@ class PessoaServiceTest {
         pessoaParaTeste.setPassword("senha123");
 
 
-        // Configurar o comportamento esperado do mock (quando o método não retorna nada, use 'doNothing')
         doNothing().when(pessoaDAOMock).criarPessoa(any());
 
-        // Chamar o método a ser testado
         Pessoa pessoaRetornada = pessoaService.criarPessoa(pessoaParaTeste);
 
-        // Verificar se o método do mock foi chamado corretamente
         verify(pessoaDAOMock, times(1)).criarPessoa(pessoaParaTeste);
     }
 
